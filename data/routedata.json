@@ -1,0 +1,6 @@
+{
+    "routes":[ 
+      { "path": "cover", "controller": "CoverPage", "action": "index" },
+      { "path": "author", "controller": "authorpage", "action": "index" }
+     ]
+  }

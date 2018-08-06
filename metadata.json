@@ -1,0 +1,31 @@
+{
+  "JS": {
+    "LOAD_ALWAYS": [
+      "app/core/path_helper.js",
+      "app/core/error_handler.js",
+      "app/core/name_helper.js",
+      "app/core/route.js",
+      "app/core/appmain.js",
+      "app/core/program.js",
+      "app/core/base_controller.js",
+      "exlib/mustache.min.js"
+    ],
+    "SHARED": [
+      "master_view"
+    ]
+  },
+  "CSS": {
+    "VIEW": [
+      "assets/css/normalize.css"
+    ]
+  },
+  "TEMPLATE": {
+    "MASTER_HEADER": "header_sidebar"
+  },
+  "PATH": {
+    "CONTROLLER": "app/modules",
+    "SHARED": "app/shared"
+  },
+  "BOOTSTRAP_TAG": "qwapp",
+  "ROUTE_INFO_FILE": "assets/data/routedata.json"
+}
