@@ -62,7 +62,7 @@
                 if(app.Config.JS && app.Config.JS.VIEW) {
                   for(let i = 0; i < app.Config.JS.VIEW.length; ++i) {
                       promises.push(app.ScriptLoad.addScript(app.PathHelper.getPath(
-                          app.Config.JS.VIEW[i]), false));
+                          app.Config.JS.VIEW[i]), true));
                   }
                 }
 

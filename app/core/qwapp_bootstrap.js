@@ -40,7 +40,7 @@
 
     /**
      * Resolves Promises sequentially
-     * @param {*} funcs 
+     * @param {*} funcs
      */
     const promiseSerial = arrPromises =>
         arrPromises.reduce((promise) =>
@@ -88,7 +88,7 @@
 
             /**
              * Bind this to the object
-             * @param {*} thisObj 
+             * @param {*} thisObj
              */
             static bindToThis(bindObj, thisObj) {
                 Object.getOwnPropertyNames(bindObj)
@@ -171,7 +171,7 @@
 
             /**
              * Method to read Json File
-             * @param {string} path 
+             * @param {string} path
              * @returns {number} Returns json response data wrapped in Promise object
              */
             static jsonFile(path) {
@@ -180,7 +180,7 @@
 
             /**
              * Method to read html File
-             * @param {string} path 
+             * @param {string} path
              * @returns {number} Returns html response data wrapped in Promise object
              */
             static htmlFile(path) {
@@ -196,31 +196,31 @@
         class ScriptLoad {
 
             /**
-             * Method to append and load script to the html file at the end of 
+             * Method to append and load script to the html file at the end of
              * head tag
-             * @param {string} jsrelfile 
+             * @param {string} jsrelfile
              */
             static addScript(sfile, noversion, ignoreErr) {
                 if(ScriptLoad.scriptIsLoaded(sfile)) return;
 
                 let script = document.createElement("script");
-                script.type = "application/javascript";
-        
+                script.type = "text/javascript";
+
                 let promiseObj = new Promise((resolve, reject) => {
                     script.onload = () => resolve();
                 });
-        
+
                 document.getElementsByTagName("head")[0].appendChild(script);
                 script.src = (noversion) ? sfile : ScriptLoad.getScriptSrc(sfile);
-        
+
                 return (ignoreErr) ? promiseObj.catch(err => app.ELog(err)) :
                     promiseObj;
             }
 
             /**
              * Method to append and load script link tag to the html file at the end
-             * @param {string} sfile 
-             * @param {*} ignoreErr 
+             * @param {string} sfile
+             * @param {*} ignoreErr
              */
             static addCssLink(sfile, noversion, ignoreErr) {
                 if(ScriptLoad.linkIsLoaded(sfile)) return;
@@ -231,17 +231,17 @@
                 let promiseObj = new Promise((resolve, reject) => {
                     link.onload = () => resolve();
                 });
-        
+
                 document.getElementsByTagName("head")[0].appendChild(link);
                 link.href = (noversion) ? sfile : ScriptLoad.getLinkSrc(sfile);
-        
+
                 return (ignoreErr) ? promiseObj.catch(err => app.ELog(err)) :
                     promiseObj;
             }
 
             /**
              * Check if the script is already loaded or not
-             * @param {string} sfile 
+             * @param {string} sfile
              */
             static scriptIsLoaded(sfile) {
                 return document.querySelector(`script[src^='${sfile}']`);
@@ -249,7 +249,7 @@
 
             /**
              * Get the script pth name appended with date info for refresh
-             * @param {*} filePath 
+             * @param {*} filePath
              */
             static getScriptSrc(filePath) {
                 return `${filePath}?${Date.now()}`;
@@ -257,7 +257,7 @@
 
             /**
              * Check if the script is already loaded or not
-             * @param {string} sfile 
+             * @param {string} sfile
              */
             static linkIsLoaded(sfile) {
                 return document.querySelector(`link[href^='${sfile}']`);
@@ -265,7 +265,7 @@
 
             /**
              * Get the script pth name appended with date info for refresh
-             * @param {*} filePath 
+             * @param {*} filePath
              */
             static getLinkSrc(filePath) {
                 return `${filePath}?${Date.now()}`;
@@ -288,7 +288,7 @@
      */
     let onLoadBootstrap = async function() {
         app.Log(`Bootstrapping Application at ${Date.now()}`);
-        
+
         let i = 0;
 
         // Even if there are no scripts to load promise should process
@@ -298,7 +298,7 @@
 
         for (; i < jsLoadAlways.length; ++i) {
             promises.push(app.ScriptLoad.addScript(
-                app.PathHelper.getPath(jsLoadAlways[i])));
+                app.PathHelper.getPath(jsLoadAlways[i]), true));
         }
 
         Promise.all(promises)
