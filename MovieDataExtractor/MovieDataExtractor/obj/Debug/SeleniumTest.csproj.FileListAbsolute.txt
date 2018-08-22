@@ -1,0 +1,12 @@
+D:\COMPANY\TEST\SeleniumTest\SeleniumTest\bin\Debug\SeleniumTest.exe.config
+D:\COMPANY\TEST\SeleniumTest\SeleniumTest\bin\Debug\SeleniumTest.exe
+D:\COMPANY\TEST\SeleniumTest\SeleniumTest\bin\Debug\SeleniumTest.pdb
+D:\COMPANY\TEST\SeleniumTest\SeleniumTest\bin\Debug\WebDriver.dll
+D:\COMPANY\TEST\SeleniumTest\SeleniumTest\bin\Debug\WebDriver.Support.dll
+D:\COMPANY\TEST\SeleniumTest\SeleniumTest\bin\Debug\WebDriver.xml
+D:\COMPANY\TEST\SeleniumTest\SeleniumTest\bin\Debug\WebDriver.Support.xml
+D:\COMPANY\TEST\SeleniumTest\SeleniumTest\obj\Debug\SeleniumTest.csproj.CoreCompileInputs.cache
+D:\COMPANY\TEST\SeleniumTest\SeleniumTest\obj\Debug\SeleniumTest.exe
+D:\COMPANY\TEST\SeleniumTest\SeleniumTest\obj\Debug\SeleniumTest.pdb
+D:\COMPANY\TEST\SeleniumTest\SeleniumTest\obj\Debug\SeleniumTest.csproj.CopyComplete
+D:\COMPANY\TEST\SeleniumTest\SeleniumTest\obj\Debug\SeleniumTest.csprojAssemblyReference.cache
