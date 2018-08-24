@@ -11,6 +11,7 @@ namespace SeleniumTest.Movies
         public OscarModel()
         {
             Awards = new Dictionary<string, OscarAwardModel>();
+            Metadata = new Dictionary<string, List<NameItem>>();
         }
 
         public int Rank { get; set; }

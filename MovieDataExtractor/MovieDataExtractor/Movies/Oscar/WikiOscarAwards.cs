@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -62,10 +63,158 @@ namespace SeleniumTest.Movies
                 ExtractMetadata();
                 ExtractAwardsTable();
 
+                FilterMetadata();
+
                 SaveCsv();
             }
         }
 
+        private void FilterMetadata()
+        {
+            var metadata = new Dictionary<string, List<NameItem>>();
+            foreach (var metadatakv in oscarModel.Metadata)
+            {
+                if (string.Compare(metadatakv.Key, "Date", true) == 0)
+                {
+                    var value = metadatakv.Value[0].Value.Replace(",", "");
+                    DateTime dtTime = new DateTime(1000, 1, 1);
+                    bool isParse = DateTime.TryParseExact(metadatakv.Value[0].Value, "MMMM d, yyyy",
+                        CultureInfo.InvariantCulture, DateTimeStyles.None, out dtTime);
+
+                    if (!isParse)
+                        isParse = DateTime.TryParseExact(value, "dddd MMMM d, yyyy",
+                        CultureInfo.InvariantCulture, DateTimeStyles.None, out dtTime);
+
+                    if (!isParse)
+                        isParse = DateTime.TryParseExact(value, "d-MMMM-yyyy",
+                        CultureInfo.InvariantCulture, DateTimeStyles.None, out dtTime);
+
+                    AddMetadata(metadata, metadatakv.Key, dtTime.ToString("yyyy-MM-dd"));
+                }
+                else if (string.Compare(metadatakv.Key, "Duration", true) == 0)
+                {
+                    var value = metadatakv.Value[0].Value.Replace(",", "");
+                    var regex = new Regex(@"(\d+)\shour(s)?\s(\d+)minute(s)?");
+                    var match = regex.Match(value);
+
+                    if (match.Success)
+                    {
+                        var hours = Convert.ToInt32(match.Groups[1].Value);
+                        var minutes = Convert.ToInt32(match.Groups[2].Value);
+                        var dtTime = new DateTime(0, 0, 0, hours, minutes, 0);
+                        AddMetadata(metadata, metadatakv.Key, dtTime.ToString("hh:mm"));
+                    }
+                }
+                else
+                {
+                    metadata.Add(metadatakv.Key, new List<NameItem>());
+                    for (int i = 0; i < metadatakv.Value.Count; i++)
+                    {
+                        metadata[metadatakv.Key].Add(metadatakv.Value[i]);
+                    }
+                }
+            }
+
+            oscarModel.Metadata = metadata;
+        }
+
+        private void AddMetadata(Dictionary<string, List<NameItem>> metadata, string key, string dtTime)
+        {
+            metadata.Add(key, new List<NameItem>() { new NameItem(){
+                Value = dtTime
+            } });
+        }
+
+        /// <summary>
+        /// Extract Oscar awards metadata
+        /// </summary>
+        private void ExtractMetadata()
+        {
+            var metaElements = driver.ByXpaths("//*[@id='mw-content-text']/div/table[contains(@class, 'infobox') and contains(@class, 'vevent')]//tr");
+
+            var isHighlights = false;
+
+            foreach (var metaEl in metaElements)
+            {
+                var th = metaEl.ByXpath("th");
+                var td = metaEl.ByXpath("td");
+
+                isHighlights = (th != null && th.Text == "Highlights");
+                if (isHighlights) continue;
+
+                if (th == null)
+                {
+                    var image = td.ByXpath("a/img");
+
+                    if (image != null)
+                    {
+                        oscarModel.Metadata.Add("Poster", new List<NameItem>() {
+                        new NameItem(){
+                            Value = AbsoluteUrl(image.GetAttribute("src"))
+                            }
+                        });
+                    }
+                }
+                else if (td != null)
+                {
+                    var tdChildsText = td.GetAttribute("innerHTML");
+                    var hap = new HtmlDocument();
+                    hap.LoadHtml(tdChildsText);
+                    oscarModel.Metadata[th.Text] = ExtractMetadata(hap.DocumentNode.ChildNodes);
+                }
+            }
+        }
+
+        private List<NameItem> ExtractMetadata(HtmlNodeCollection tdChilds)
+        {
+            var keyValuePairs = new List<NameItem>();
+            ExtractMetadataPairs(tdChilds, keyValuePairs);
+            return keyValuePairs;
+        }
+
+        private void ExtractMetadataPairs(HtmlNodeCollection tdChilds, List<NameItem> keyValuePairs)
+        {
+            List<HtmlNode> htmlNodes = ExtractNodeFilterBy(tdChilds.ToList());
+
+            foreach (var item in htmlNodes)
+            {
+                if (item.NodeType == HtmlNodeType.Element && (
+                    (item.Name == "br") ||
+                    (item.Name == "sup" &&
+                    item.InnerText.Contains("[") && item.InnerText.Contains("]")) ||
+                    CheckIfNeedToSkip(item.InnerText)
+                    ))
+                    continue;
+                else if ((item.NodeType == HtmlNodeType.Text) ||
+                    (item.NodeType == HtmlNodeType.Element && item.Name == "span"))
+                {
+                    var norm = Norm(item.InnerText);
+                    var splits = norm.Split(',');
+
+                    foreach (var splitItem in splits)
+                    {
+                        keyValuePairs.Add(new NameItem()
+                        {
+                            Value = Norm(splitItem)
+                        });
+                    }
+                }
+                else if (item.NodeType == HtmlNodeType.Element && item.Name == "a")
+                {
+                    keyValuePairs.Add(new NameItem()
+                    {
+                        Key = AbsoluteUrl(item.GetAttributeValue("href", "")),
+                        Value = Norm(item.InnerText)
+                    });
+                }
+                else
+                    throw new Exception("Unknwon node " + item.OuterHtml);
+            }
+        }
+
+        /// <summary>
+        /// Extract awards table
+        /// </summary>
         private void ExtractAwardsTable()
         {
             var tableRows = driver.ByXpaths("//*[@id='mw-content-text']/div/table[@class='wikitable'][1]//tr");
@@ -128,6 +277,11 @@ namespace SeleniumTest.Movies
             }
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="awardHeader"></param>
+        /// <param name="awardElement"></param>
         private void ExtractDataForHeaderAndDataRow(IWebElement awardHeader,
             IWebElement awardElement)
         {
@@ -148,106 +302,9 @@ namespace SeleniumTest.Movies
             ExtractNominations(nominationElements, topicModel);
         }
 
-        private void ExtractMetadata()
-        {
-            var metaElements = driver.ByXpaths("//*[@id='mw-content-text']/div/table[contains(@class, 'infobox') and contains(@class, 'vevent')]//tr");
-
-            oscarModel.Metadata = new Dictionary<string, List<NameItem>>();
-            bool isHighlights = false;
-
-            foreach (var metaEl in metaElements)
-            {
-                var th = metaEl.ByXpath("th");
-                var td = metaEl.ByXpath("td");
-
-                if (th != null && th.Text == "Highlights")
-                {
-                    isHighlights = true;
-                    continue;
-                }
-                else
-                    isHighlights = false;
-
-                if (isHighlights) continue;
-
-                if (th == null)
-                {
-                    var image = td.ByXpath("a/img");
-
-                    if(image != null)
-                    {
-                        oscarModel.Metadata.Add("Poster", new List<NameItem>() {
-                        new NameItem(){
-                            Value = AbsoluteUrl(image.GetAttribute("src"))
-                            }
-                        });
-                    }
-                }
-                else if(td != null)
-                {
-                    var tdChildsText = td.GetAttribute("innerHTML");
-                    var hap = new HtmlDocument();
-                    hap.LoadHtml(tdChildsText);
-                    oscarModel.Metadata[th.Text] = ExtractMetadata(hap.DocumentNode.ChildNodes);
-                }
-                else 
-                {
-                    if (th.Text == "Highlights") isHighlights = true;
-                    else isHighlights = false;
-                }
-            }
-        }
-
         private string AbsoluteUrl(string url)
         {
             return new Uri(new Uri("https://en.wikipedia.org/"), url).AbsoluteUri;
-        }
-
-        private List<NameItem> ExtractMetadata(HtmlNodeCollection tdChilds)
-        {
-            var keyValuePairs = new List<NameItem>();
-            ExtractMetadataPairs(tdChilds, keyValuePairs);
-            return keyValuePairs;
-        }
-
-        private void ExtractMetadataPairs(HtmlNodeCollection tdChilds, List<NameItem> keyValuePairs)
-        {
-            List<HtmlNode> htmlNodes = ExtractNodeFilterBy(tdChilds.ToList());
-
-            foreach (var item in htmlNodes)
-            {
-                if (item.NodeType == HtmlNodeType.Element && item.Name == "br")
-                    continue;
-                else if (item.NodeType == HtmlNodeType.Element && item.Name == "sup" &&
-                    item.InnerText.Contains("[") && item.InnerText.Contains("]")) continue;
-                else if (CheckIfNeedToSkip(item.InnerText)) continue;
-                else if (item.NodeType == HtmlNodeType.Text)
-                {
-                    keyValuePairs.Add(new NameItem()
-                    {
-                        Key = "",
-                        Value = Norm(item.InnerText)
-                    });
-                }
-                else if (item.NodeType == HtmlNodeType.Element && item.Name == "a")
-                {
-                    keyValuePairs.Add(new NameItem()
-                    {
-                        Key = AbsoluteUrl(item.GetAttributeValue("href", "")),
-                        Value = Norm(item.InnerText)
-                    });
-                }
-                else if (item.NodeType == HtmlNodeType.Element && item.Name == "span")
-                {
-                    keyValuePairs.Add(new NameItem()
-                    {
-                        Key = "",
-                        Value = Norm(item.InnerText)
-                    });
-                }
-                else
-                    throw new Exception("Unknwon node " + item.OuterHtml);
-            }
         }
 
         private bool CheckIfNeedToSkip(string innerText)
@@ -355,17 +412,7 @@ namespace SeleniumTest.Movies
 
                     if (splits != null && splits.Length > 0)
                     {
-                        if (!CheckIfNeedToSkip(splits[0]))
-                            keyValuePairs.Add(new NameItem()
-                            {
-                                Key = item.Item1,
-                                Value = Norm(splits[0]),
-                                IsKeyItem = isKeyItem
-                            });
-
-                        int i = 1, indexbck = index;
-                        isKeyItem = false;
-                        for (; i < splits.Length; i++)
+                        for (int i = 0; i < splits.Length; i++)
                         {
                             if (!CheckIfNeedToSkip(splits[i]))
                             {
@@ -373,37 +420,24 @@ namespace SeleniumTest.Movies
                                 {
                                     Key = item.Item1,
                                     Value = Norm(splits[i]),
-                                    IsKeyItem = isKeyItem
+                                    IsKeyItem = i == 0
                                 });
-                                winNodes.Insert(index + i, new Tuple<string, string>(item.Item1, splits[i]));
+                                if(i > 0)
+                                    winNodes.Insert(index + i, new Tuple<string, string>(item.Item1, splits[i]));
                             }
-                        }
-                    }
-                    else
-                    {
-                        if (!CheckIfNeedToSkip(item.Item2))
-                        {
-                            keyValuePairs.Add(new NameItem()
-                            {
-                                Key = item.Item1,
-                                Value = Norm(item.Item2),
-                                IsKeyItem = isKeyItem
-                            });
                         }
                     }
                     isKeyItem = false;
                 }
-                else
+
+                if (!CheckIfNeedToSkip(item.Item2))
                 {
-                    if (!CheckIfNeedToSkip(item.Item2))
+                    keyValuePairs.Add(new NameItem()
                     {
-                        keyValuePairs.Add(new NameItem()
-                        {
-                            Key = item.Item1,
-                            Value = item.Item2,
-                            IsKeyItem = isKeyItem
-                        });
-                    }
+                        Key = item.Item1,
+                        Value = Norm(item.Item2),
+                        IsKeyItem = isKeyItem
+                    });
                 }
             }
 
