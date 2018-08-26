@@ -62,4 +62,30 @@ namespace SeleniumTest.Movies
             return obj != null && obj.Key == this.Key;
         }
     }
+
+    class AwardItem
+    {
+        public string UrlKey1 { get; set; }
+        public string Key1 { get; set; }
+        public string UrlKey2 { get; set; }
+        public string Key2 { get; set; }
+        public string Type1 { get; set; }
+        public string Url1 { get; set; }
+        public string Value1 { get; set; }
+        public string Type2 { get; set; }
+        public string Url2 { get; set; }
+        public string Value2 { get; set; }
+        public string Type3 { get; set; }
+        public string Url3 { get; set; }
+        public string Value3 { get; set; }
+        public string Type4 { get; set; }
+        public string Url4 { get; set; }
+        public string Value4 { get; set; }
+        public string Type5 { get; set; }
+        public string Url5 { get; set; }
+        public string Value5 { get; set; }
+        public string Type6 { get; set; }
+        public string Url6 { get; set; }
+        public string Value6 { get; set; }
+    }
 }

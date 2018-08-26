@@ -64,11 +64,13 @@ namespace SeleniumTest.Movies
                 ExtractAwardsTable();
 
                 FilterMetadata();
+                //FilterWins();
 
                 SaveCsv();
+                //SaveJson();
             }
         }
-
+        
         private void FilterMetadata()
         {
             var metadata = new Dictionary<string, List<NameItem>>();
@@ -78,30 +80,45 @@ namespace SeleniumTest.Movies
                 {
                     var value = metadatakv.Value[0].Value.Replace(",", "");
                     DateTime dtTime = new DateTime(1000, 1, 1);
-                    bool isParse = DateTime.TryParseExact(metadatakv.Value[0].Value, "MMMM d, yyyy",
+                    var valueDt = "";
+
+                    if (metadatakv.Value.Count > 1)
+                        valueDt = $"{metadatakv.Value[0].Value} {metadatakv.Value[1].Value}";
+                    else
+                        valueDt = metadatakv.Value[0].Value;
+                    bool isParse = DateTime.TryParseExact(valueDt, "MMMM d yyyy",
                         CultureInfo.InvariantCulture, DateTimeStyles.None, out dtTime);
 
                     if (!isParse)
-                        isParse = DateTime.TryParseExact(value, "dddd MMMM d, yyyy",
+                        isParse = DateTime.TryParseExact(valueDt, "dddd MMMM d yyyy",
                         CultureInfo.InvariantCulture, DateTimeStyles.None, out dtTime);
 
                     if (!isParse)
-                        isParse = DateTime.TryParseExact(value, "d-MMMM-yyyy",
+                        isParse = DateTime.TryParseExact(metadatakv.Value[0].Value, "d-MMMM-yyyy",
+                        CultureInfo.InvariantCulture, DateTimeStyles.None, out dtTime);
+
+                    if (!isParse)
+                        isParse = DateTime.TryParseExact(valueDt, "d MMMM yyyy",
                         CultureInfo.InvariantCulture, DateTimeStyles.None, out dtTime);
 
                     AddMetadata(metadata, metadatakv.Key, dtTime.ToString("yyyy-MM-dd"));
                 }
                 else if (string.Compare(metadatakv.Key, "Duration", true) == 0)
                 {
-                    var value = metadatakv.Value[0].Value.Replace(",", "");
-                    var regex = new Regex(@"(\d+)\shour(s)?\s(\d+)minute(s)?");
+                    var value = "";
+
+                    if (metadatakv.Value.Count > 1)
+                        value = $"{metadatakv.Value[0].Value} {metadatakv.Value[1].Value}";
+                    else
+                        value = metadatakv.Value[0].Value.Replace(",", "");
+                    var regex = new Regex(@"(\d+)\shour(s)?\s(\d+)\sminute(s)?");
                     var match = regex.Match(value);
 
                     if (match.Success)
                     {
                         var hours = Convert.ToInt32(match.Groups[1].Value);
-                        var minutes = Convert.ToInt32(match.Groups[2].Value);
-                        var dtTime = new DateTime(0, 0, 0, hours, minutes, 0);
+                        var minutes = Convert.ToInt32(match.Groups[3].Value);
+                        var dtTime = new DateTime(1900, 1, 1, hours, minutes, 0);
                         AddMetadata(metadata, metadatakv.Key, dtTime.ToString("hh:mm"));
                     }
                 }
@@ -311,7 +328,8 @@ namespace SeleniumTest.Movies
         {
             var norm = HttpUtility.HtmlDecode(innerText);
             norm = norm.Trim();
-            norm = norm.Replace(",", "").Replace(";", "").Replace(":", "").Replace("(", " ").Replace(")", " ");
+            norm = norm.Replace(",", "").Replace(";", "").Replace(":", "").Replace("(", " ").Replace(")", " ")
+                .Replace((char)0xA0, ' ');
 
             var regex = new Regex(@"^\(\d+\)$", RegexOptions.IgnoreCase);
 
@@ -321,7 +339,7 @@ namespace SeleniumTest.Movies
         private string Norm(string innerText)
         {
             var norm = HttpUtility.HtmlDecode(innerText);
-            norm = norm.Replace("\r", " ").Replace("\n", " ").Replace("  ", " ")
+            norm = norm.Replace("\r", " ").Replace("\n", " ").Replace("  ", " ").Replace((char)0xA0, ' ')
                 .TrimEnd(',', ' ').TrimStart(',', ' ').Trim();
             return norm;
         }
@@ -429,8 +447,7 @@ namespace SeleniumTest.Movies
                     }
                     isKeyItem = false;
                 }
-
-                if (!CheckIfNeedToSkip(item.Item2))
+                else if (!CheckIfNeedToSkip(item.Item2))
                 {
                     keyValuePairs.Add(new NameItem()
                     {
