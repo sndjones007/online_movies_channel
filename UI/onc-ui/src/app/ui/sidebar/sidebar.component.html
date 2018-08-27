@@ -1,0 +1,17 @@
+<!-- Sidebar  -->
+<nav id="sidebar">
+    <div class="sidebar-header">
+        <div class="row">
+            <div class="col-md-2 logo-img"><i class="fa fa-television fa-2x" aria-hidden="true"></i></div>
+            <div class="col logo-text">&nbsp;&nbsp;Movie Awards</div>
+        </div>
+    </div>
+    <ul class="list-unstyled components">
+        <li *ngIf="is_sub_menu">
+            <a href="javascript:void(0);" (click)="onDisplayDecades()">&lt;</a>
+        </li>
+        <li *ngFor="let year of award_years">
+            <a href="javascript:void(0);" (click)="onDisplayOscarItem(year)">{{year}}</a>
+        </li>
+    </ul>
+</nav>
