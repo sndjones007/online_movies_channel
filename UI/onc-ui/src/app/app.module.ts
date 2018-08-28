@@ -6,13 +6,19 @@ import { AppComponent } from './app.component';
 import { SidebarComponent } from './ui/sidebar/sidebar.component';
 import { LayoutComponent } from './ui/layout/layout.component';
 import { MainContentComponent } from './ui/main-content/main-content.component';
+import { ContactComponent } from './ui/contact/contact.component';
+import { AcademyAwardsComponent } from './ui/academy-awards/academy-awards.component';
+import { AboutComponent } from './ui/about/about.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidebarComponent,
     LayoutComponent,
-    MainContentComponent
+    MainContentComponent,
+    ContactComponent,
+    AcademyAwardsComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
