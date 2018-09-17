@@ -63,6 +63,8 @@
     <Compile Include="HttpRequestConfiguration.cs" />
     <Compile Include="Movies\AcademyAwardsWinners.cs" />
     <Compile Include="Movies\AcademyAwardsWinnersModel.cs" />
+    <Compile Include="Movies\Bafta\BaftaAwards.cs" />
+    <Compile Include="Movies\Bafta\BaftaMovieAwardsParser.cs" />
     <Compile Include="Movies\MoviePropertyItemModel.cs" />
     <Compile Include="Movies\Oscar\OscarModel.cs" />
     <Compile Include="Movies\OscarPrizeItemModel.cs" />
