@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.IE;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -25,7 +26,8 @@ namespace SeleniumTest
 
         public void Initialize()
         {
-            driver = new ChromeDriver(@"D:\Google\chromedriver_win32");
+            //driver = new ChromeDriver(@"D:\WebDriver\chromedriver_win32");
+            driver = new InternetExplorerDriver(@"D:\WebDriver\IEDriverServer_Win32_3.14.0");
         }
 
         public void Navigate(string url)
