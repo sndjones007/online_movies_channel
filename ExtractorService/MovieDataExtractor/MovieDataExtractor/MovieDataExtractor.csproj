@@ -73,6 +73,8 @@
     <Compile Include="Movies\WikiMovieInfo.cs" />
     <Compile Include="Movies\Oscar\WikiOscarAwards.cs" />
     <Compile Include="Movies\WikiOscarAwardsMetadataModel.cs" />
+    <Compile Include="OscarOrg\ExtractAwardTitle.cs" />
+    <Compile Include="OscarOrg\OscarOrgModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeleniumService.cs" />

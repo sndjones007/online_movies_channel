@@ -26,8 +26,8 @@ namespace SeleniumTest
 
         public void Initialize()
         {
-            //driver = new ChromeDriver(@"D:\WebDriver\chromedriver_win32");
-            driver = new InternetExplorerDriver(@"D:\WebDriver\IEDriverServer_Win32_3.14.0");
+            driver = new ChromeDriver(@"D:\WebDriver\chromedriver_win32");
+            //driver = new InternetExplorerDriver(@"D:\WebDriver\IEDriverServer_Win32_3.14.0");
         }
 
         public void Navigate(string url)
