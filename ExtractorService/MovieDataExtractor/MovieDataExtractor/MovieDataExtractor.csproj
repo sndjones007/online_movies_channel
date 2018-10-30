@@ -58,21 +58,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cinemasight\CinemaSightOscarExtract.cs" />
     <Compile Include="Db\MySqlConnector.cs" />
     <Compile Include="HttpDownloadFile.cs" />
     <Compile Include="HttpRequestConfiguration.cs" />
-    <Compile Include="Movies\AcademyAwardsWinners.cs" />
-    <Compile Include="Movies\AcademyAwardsWinnersModel.cs" />
-    <Compile Include="Movies\Bafta\BaftaAwards.cs" />
-    <Compile Include="Movies\Bafta\BaftaMovieAwardsParser.cs" />
-    <Compile Include="Movies\MoviePropertyItemModel.cs" />
-    <Compile Include="Movies\Oscar\OscarModel.cs" />
-    <Compile Include="Movies\OscarPrizeItemModel.cs" />
-    <Compile Include="Movies\OscarWikiDatabase.cs" />
-    <Compile Include="Movies\WikiMovieItem.cs" />
-    <Compile Include="Movies\WikiMovieInfo.cs" />
-    <Compile Include="Movies\Oscar\WikiOscarAwards.cs" />
-    <Compile Include="Movies\WikiOscarAwardsMetadataModel.cs" />
     <Compile Include="OscarOrg\ExtractAwardTitle.cs" />
     <Compile Include="OscarOrg\OscarOrgModel.cs" />
     <Compile Include="Program.cs" />
