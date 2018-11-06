@@ -2,7 +2,7 @@
 using System;
 using System.Configuration;
 
-namespace SeleniumTest.Db
+namespace MovieDataExtractor.Db
 {
     class MySqlConnector
     {

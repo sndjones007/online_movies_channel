@@ -1,0 +1,48 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MovieDataExtractor.Cinemasight" GeneratedClassName="CinemaSightExtractorSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="BaseUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://www.cinemasight.com/awards-history</Value>
+    </Setting>
+    <Setting Name="XpathAwardIndexExtract" Type="System.String" Scope="User">
+      <Value Profile="(Default)">(//div[@id='content']/article/div[2]/table//tr//td//a)[position() &gt; 1 and position() &lt; 92]</Value>
+    </Setting>
+    <Setting Name="FileNameAwards" Type="System.String" Scope="User">
+      <Value Profile="(Default)">cinemasight_awards.csv</Value>
+    </Setting>
+    <Setting Name="FileNameCeremonyDetails" Type="System.String" Scope="User">
+      <Value Profile="(Default)">cinemasight_ceremony.csv</Value>
+    </Setting>
+    <Setting Name="ColumnNamesAwards" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Year,Category,Winner,Key,Subkey</Value>
+    </Setting>
+    <Setting Name="ColumnNamesCeremony" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Year,Topic,Winner,SubTopic,Value</Value>
+    </Setting>
+    <Setting Name="XpathYearSpecificIndices" Type="System.String" Scope="User">
+      <Value Profile="(Default)">//div[@id='content']/article/div[2]/table[1]//tr/td[2]/p[position()&lt;3]//a</Value>
+    </Setting>
+    <Setting Name="XpathAwardsYearSpecificCategoriesGroup" Type="System.String" Scope="User">
+      <Value Profile="(Default)">//div[@id='content']/article/div[2]/*[position() &gt; 4]</Value>
+    </Setting>
+    <Setting Name="XpathCeremoniesYearSpecific" Type="System.String" Scope="User">
+      <Value Profile="(Default)">//div[@id='content']/article/div[2]/*[position() &gt; 1]</Value>
+    </Setting>
+    <Setting Name="ProcessSpecificOscarYear" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FileNameMoments" Type="System.String" Scope="User">
+      <Value Profile="(Default)">cinemasight_moments.csv</Value>
+    </Setting>
+    <Setting Name="XpathAwardsNotes" Type="System.String" Scope="User">
+      <Value Profile="(Default)">//div[@id='content']/article/div[2]//ol/li</Value>
+    </Setting>
+    <Setting Name="ColumnNamesMoments" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Year,Topic,SubTopic,Value</Value>
+    </Setting>
+    <Setting Name="SkipProcessing" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

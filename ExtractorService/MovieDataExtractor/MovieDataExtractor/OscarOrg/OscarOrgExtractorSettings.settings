@@ -1,0 +1,84 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MovieDataExtractor.OscarOrg" GeneratedClassName="OscarOrgExtractorSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="BaseUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://www.oscars.org/oscars/ceremonies/{0}</Value>
+    </Setting>
+    <Setting Name="FileNameAwards" Type="System.String" Scope="User">
+      <Value Profile="(Default)">oscarArg_Awards.csv</Value>
+    </Setting>
+    <Setting Name="FileNameMemorableMoments" Type="System.String" Scope="User">
+      <Value Profile="(Default)">oscarArg_Memorable.csv</Value>
+    </Setting>
+    <Setting Name="FileNameAwardsPics" Type="System.String" Scope="User">
+      <Value Profile="(Default)">oscarArg_AwardsPics.csv</Value>
+    </Setting>
+    <Setting Name="FileNameMetadata" Type="System.String" Scope="User">
+      <Value Profile="(Default)">oscarArg_AwardsMetadata.csv</Value>
+    </Setting>
+    <Setting Name="ColumnNameAwards" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Year,Type,WinOrLose,Key,Item</Value>
+    </Setting>
+    <Setting Name="ColumNameMemorableMoments" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Year,Moments</Value>
+    </Setting>
+    <Setting Name="ColumnNameAwardsPics" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Year,Type,Content,Title,Description,Youtube,Url</Value>
+    </Setting>
+    <Setting Name="ColumnNameMetadata" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Year,Location,Date,Honoring</Value>
+    </Setting>
+    <Setting Name="XpathAwardsCategoryYearSpecific" Type="System.String" Scope="User">
+      <Value Profile="(Default)">//*[@id='quicktabs-tabpage-honorees-0']/div/div[2]/div[@class='view-grouping']/div</Value>
+    </Setting>
+    <Setting Name="XpathFieldKeyName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">./div[contains(@class, 'views-field-field-actor-name')]</Value>
+    </Setting>
+    <Setting Name="XpathFieldKeyValue" Type="System.String" Scope="User">
+      <Value Profile="(Default)">./div[contains(@class, 'views-field-title')]</Value>
+    </Setting>
+    <Setting Name="XpathOscarHighlightPics" Type="System.String" Scope="User">
+      <Value Profile="(Default)">//div[contains(@class,'field--name-field-ceremonies-media')]</Value>
+    </Setting>
+    <Setting Name="XpathPicsCaption" Type="System.String" Scope="User">
+      <Value Profile="(Default)">../div[contains(@class,'field--name-field-caption')]</Value>
+    </Setting>
+    <Setting Name="XpathPicsLink" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.//a</Value>
+    </Setting>
+    <Setting Name="XpathMetadataOscarTitle" Type="System.String" Scope="User">
+      <Value Profile="(Default)">//div[contains(@class,'views-field-field-location-name')]</Value>
+    </Setting>
+    <Setting Name="XpathMetadataOscarDate" Type="System.String" Scope="User">
+      <Value Profile="(Default)">//div[contains(@class,'views-field-field-date')]</Value>
+    </Setting>
+    <Setting Name="XpathMetadataOscarHonoringDate" Type="System.String" Scope="User">
+      <Value Profile="(Default)">//div[contains(@class,'views-field-field-honoring-line')]</Value>
+    </Setting>
+    <Setting Name="ProcessStartYearOfOscar" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1929</Value>
+    </Setting>
+    <Setting Name="ProcessEndYearOfOscar" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2018</Value>
+    </Setting>
+    <Setting Name="MomentsRelativeUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">/memorable-moments</Value>
+    </Setting>
+    <Setting Name="XpathMomentPictureImg" Type="System.String" Scope="User">
+      <Value Profile="(Default)">//div[contains(@class,'field--name-field-hero-image')]//img</Value>
+    </Setting>
+    <Setting Name="XpathMomentDiv" Type="System.String" Scope="User">
+      <Value Profile="(Default)">//div[contains(@class,'field--type-text-with-summary')]//div[contains(@class,'even')]/*</Value>
+    </Setting>
+    <Setting Name="XpathWinningElements" Type="System.String" Scope="User">
+      <Value Profile="(Default)">{0}/preceding-sibling::node()[not(self::text())]</Value>
+    </Setting>
+    <Setting Name="XpathNominationElements" Type="System.String" Scope="User">
+      <Value Profile="(Default)">{0}/following-sibling::node()[not(self::text())]</Value>
+    </Setting>
+    <Setting Name="XpathNominationHeader" Type="System.String" Scope="User">
+      <Value Profile="(Default)">./h3[2]</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

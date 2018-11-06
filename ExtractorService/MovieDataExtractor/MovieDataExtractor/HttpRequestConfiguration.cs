@@ -2,7 +2,7 @@
 using System.Net.Security;
 using System.Security.Principal;
 
-namespace SeleniumTest
+namespace MovieDataExtractor
 {
     class HttpRequestConfiguration
     {

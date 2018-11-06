@@ -1,13 +1,21 @@
-﻿using OpenQA.Selenium;
+﻿using log4net;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Reflection;
 
-namespace SeleniumTest
+namespace MovieDataExtractor
 {
     public class SeleniumService : IDisposable
     {
+        /// <summary>
+        /// The logger for the cinemasight award extract class
+        /// </summary>
+        private static readonly ILog logger =
+            LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         public IWebDriver driver;
 
         public SeleniumService()
@@ -37,7 +45,7 @@ namespace SeleniumTest
             {
                 return driver.FindElement(By.Name(name));
             }
-            catch(Exception ex)
+            catch(Exception /*ex*/)
             {
                 return null;
             }
@@ -49,7 +57,7 @@ namespace SeleniumTest
             {
                 return driver.FindElement(By.XPath(name));
             }
-            catch (Exception ex)
+            catch (Exception /*ex*/)
             {
                 return null;
             }
@@ -61,7 +69,7 @@ namespace SeleniumTest
             {
                 return driver.FindElements(By.XPath(name));
             }
-            catch (Exception ex)
+            catch (Exception /*ex*/)
             {
                 return null;
             }
@@ -81,6 +89,12 @@ namespace SeleniumTest
 
     public static class IWebElement_Extension
     {
+        /// <summary>
+        /// The logger for the cinemasight award extract class
+        /// </summary>
+        private static readonly ILog logger =
+            LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         public static ReadOnlyCollection<IWebElement> ByXpaths(this IWebElement thisObj, string name)
         {
             try
@@ -89,8 +103,9 @@ namespace SeleniumTest
             }
             catch (Exception ex)
             {
-                return null;
+                logger.Error("", ex);
             }
+            return null;
         }
 
         public static IWebElement ByXpath(this IWebElement thisObj, string name)
@@ -99,7 +114,7 @@ namespace SeleniumTest
             {
                 return thisObj.FindElement(By.XPath(name));
             }
-            catch (Exception ex)
+            catch (Exception /*ex*/)
             {
                 return null;
             }
