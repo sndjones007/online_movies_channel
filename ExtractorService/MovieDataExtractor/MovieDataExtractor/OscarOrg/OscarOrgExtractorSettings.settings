@@ -80,5 +80,50 @@
     <Setting Name="XpathNominationHeader" Type="System.String" Scope="User">
       <Value Profile="(Default)">./h3[2]</Value>
     </Setting>
+    <Setting Name="SkipProcessing" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="FileNameAwardsNormalize" Type="System.String" Scope="User">
+      <Value Profile="(Default)">oscarOrg_Awards_Normalize.csv</Value>
+    </Setting>
+    <Setting Name="FileNameMovies" Type="System.String" Scope="User">
+      <Value Profile="(Default)">oscarOrg_Movies.csv</Value>
+    </Setting>
+    <Setting Name="FileNamesPerson" Type="System.String" Scope="User">
+      <Value Profile="(Default)">oscarOrg_Persons.csv</Value>
+    </Setting>
+    <Setting Name="FileNameAwardType" Type="System.String" Scope="User">
+      <Value Profile="(Default)">oscarOrg_AwardType.csv</Value>
+    </Setting>
+    <Setting Name="ColumnNameAwardsNormalize" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Year,AwardTypeId,IsWinner,MovieId,PersonId</Value>
+    </Setting>
+    <Setting Name="ColumnNamePerson" Type="System.String" Scope="User">
+      <Value Profile="(Default)">PersonId,Name</Value>
+    </Setting>
+    <Setting Name="ColumnNameMovies" Type="System.String" Scope="User">
+      <Value Profile="(Default)">MovieId,Name</Value>
+    </Setting>
+    <Setting Name="ColumnNameAwardType" Type="System.String" Scope="User">
+      <Value Profile="(Default)">TypeId,Name</Value>
+    </Setting>
+    <Setting Name="ColumnNameMusicSong" Type="System.String" Scope="User">
+      <Value Profile="(Default)">MovieId,AwardTypeId,Name</Value>
+    </Setting>
+    <Setting Name="FileNameMusicSong" Type="System.String" Scope="User">
+      <Value Profile="(Default)">oscarOrg_MusicSong.csv</Value>
+    </Setting>
+    <Setting Name="FileNameJob" Type="System.String" Scope="User">
+      <Value Profile="(Default)">oscarOrg_Job.csv</Value>
+    </Setting>
+    <Setting Name="ColumnNameJob" Type="System.String" Scope="User">
+      <Value Profile="(Default)">JobId,Name</Value>
+    </Setting>
+    <Setting Name="FileNamePersonJob" Type="System.String" Scope="User">
+      <Value Profile="(Default)">oscarOrg_PersonJob.csv</Value>
+    </Setting>
+    <Setting Name="ColumnNamePersonJob" Type="System.String" Scope="User">
+      <Value Profile="(Default)">PersonId,JobId</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

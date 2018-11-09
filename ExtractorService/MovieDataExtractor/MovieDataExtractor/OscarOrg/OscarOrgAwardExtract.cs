@@ -75,6 +75,8 @@ namespace MovieDataExtractor.OscarOrg
         /// </summary>
         public void Run()
         {
+            if (config.SkipProcessing) return;
+
             // Write to file
             using (awardWriter = new StreamWriter(config.FileNameAwards))
             using (memorableMomentsWriter = new StreamWriter(config.FileNameMemorableMoments))
@@ -182,8 +184,9 @@ namespace MovieDataExtractor.OscarOrg
                 var keyItemElement = elemDiv.ByXpath(config.XpathFieldKeyName);
                 var valueItemElement = elemDiv.ByXpath(config.XpathFieldKeyValue);
 
-                cacheExtract.YearModel.AddCategoryItem(Helper_TrimData(keyItemElement.Text),
-                    Helper_TrimData(valueItemElement.Text), isWinner);
+                cacheExtract.YearModel.AddCategoryItem(
+                    Helper_Normalize(Helper_TrimData(keyItemElement.Text)),
+                    Helper_Normalize(Helper_TrimData(valueItemElement.Text)), isWinner);
             }
 
             if(!isWinner)
@@ -307,7 +310,7 @@ namespace MovieDataExtractor.OscarOrg
                 }
                 else
                 {
-                    var trimData = Helper_TrimDataWithNewLines(currentElement.Text);
+                    var trimData = Helper_Normalize(Helper_TrimDataWithNewLines(currentElement.Text));
                     if (string.IsNullOrEmpty(paragraph)) paragraph = trimData;
                     else paragraph += "-" + trimData;
                 }

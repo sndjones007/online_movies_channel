@@ -59,6 +59,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\BaseFileSanitizer.cs" />
     <Compile Include="Base\CommonData.cs" />
     <Compile Include="Base\ExtractDataFromWebsite.cs" />
     <Compile Include="Base\WebsiteDataExtractorBaseConfigSection.cs" />
@@ -74,12 +75,14 @@
     <Compile Include="HttpDownloadFile.cs" />
     <Compile Include="HttpRequestConfiguration.cs" />
     <Compile Include="OscarOrg\OscarOrgAwardExtract.cs" />
+    <Compile Include="OscarOrg\OscarOrgAwardNormalizeCache.cs" />
     <Compile Include="OscarOrg\OscarOrgConfigSection.cs" />
     <Compile Include="OscarOrg\OscarOrgExtractorSettings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>OscarOrgExtractorSettings.settings</DependentUpon>
     </Compile>
+    <Compile Include="OscarOrg\OscarOrgFileSanitizer.cs" />
     <Compile Include="OscarOrg\TempModelForExtract.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

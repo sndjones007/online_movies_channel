@@ -58,6 +58,17 @@ namespace MovieDataExtractor.Base
         /// </summary>
         /// <param name="content"></param>
         /// <returns></returns>
+        protected string Helper_Normalize(string content)
+        {
+            if (content == null) return "";
+            return content.Replace('"', '|');
+        }
+
+        /// <summary>
+        /// Helper method to trim the data extracted
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns></returns>
         protected string Helper_TrimDataWithNewLines(string content, params char[] trimOptions)
         {
             return Helper_TrimData(content).Replace("\r","").Replace("\n","");

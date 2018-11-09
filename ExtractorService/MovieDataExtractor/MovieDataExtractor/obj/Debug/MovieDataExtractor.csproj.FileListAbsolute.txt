@@ -58,3 +58,4 @@ D:\COMPANY\GITHUB\sndjones007\online_movies_channel\ExtractorService\MovieDataEx
 D:\COMPANY\GITHUB\sndjones007\online_movies_channel\ExtractorService\MovieDataExtractor\MovieDataExtractor\obj\Debug\MovieDataExtractor.csproj.CopyComplete
 D:\COMPANY\GITHUB\sndjones007\online_movies_channel\ExtractorService\MovieDataExtractor\MovieDataExtractor\obj\Debug\MovieDataExtractor.exe
 D:\COMPANY\GITHUB\sndjones007\online_movies_channel\ExtractorService\MovieDataExtractor\MovieDataExtractor\obj\Debug\MovieDataExtractor.pdb
+D:\COMPANY\GITHUB\sndjones007\online_movies_channel\ExtractorService\MovieDataExtractor\MovieDataExtractor\obj\Debug\MovieDataExtractor.csprojAssemblyReference.cache

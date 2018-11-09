@@ -35,6 +35,14 @@ namespace MovieDataExtractor
                 logger.Info("End extracting movie data from oscar org url");
             }
 
+            // Formatting
+            logger.Info("Start normalizing oscar awards file");
+
+            var awardOscarNormalize = new OscarOrgFileSanitizer();
+            awardOscarNormalize.Run();
+
+            logger.Info("End normalizing oscar awards file");
+
             logger.Info("End the Movie Extractor program");
         }
     }

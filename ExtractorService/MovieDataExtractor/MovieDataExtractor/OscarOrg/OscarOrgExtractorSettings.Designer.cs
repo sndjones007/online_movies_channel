@@ -336,5 +336,185 @@ namespace MovieDataExtractor.OscarOrg {
                 this["XpathNominationHeader"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool SkipProcessing {
+            get {
+                return ((bool)(this["SkipProcessing"]));
+            }
+            set {
+                this["SkipProcessing"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("oscarOrg_Awards_Normalize.csv")]
+        public string FileNameAwardsNormalize {
+            get {
+                return ((string)(this["FileNameAwardsNormalize"]));
+            }
+            set {
+                this["FileNameAwardsNormalize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("oscarOrg_Movies.csv")]
+        public string FileNameMovies {
+            get {
+                return ((string)(this["FileNameMovies"]));
+            }
+            set {
+                this["FileNameMovies"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("oscarOrg_Persons.csv")]
+        public string FileNamesPerson {
+            get {
+                return ((string)(this["FileNamesPerson"]));
+            }
+            set {
+                this["FileNamesPerson"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("oscarOrg_AwardType.csv")]
+        public string FileNameAwardType {
+            get {
+                return ((string)(this["FileNameAwardType"]));
+            }
+            set {
+                this["FileNameAwardType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Year,AwardTypeId,IsWinner,MovieId,PersonId")]
+        public string ColumnNameAwardsNormalize {
+            get {
+                return ((string)(this["ColumnNameAwardsNormalize"]));
+            }
+            set {
+                this["ColumnNameAwardsNormalize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("PersonId,Name")]
+        public string ColumnNamePerson {
+            get {
+                return ((string)(this["ColumnNamePerson"]));
+            }
+            set {
+                this["ColumnNamePerson"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("MovieId,Name")]
+        public string ColumnNameMovies {
+            get {
+                return ((string)(this["ColumnNameMovies"]));
+            }
+            set {
+                this["ColumnNameMovies"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("TypeId,Name")]
+        public string ColumnNameAwardType {
+            get {
+                return ((string)(this["ColumnNameAwardType"]));
+            }
+            set {
+                this["ColumnNameAwardType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("MovieId,AwardTypeId,Name")]
+        public string ColumnNameMusicSong {
+            get {
+                return ((string)(this["ColumnNameMusicSong"]));
+            }
+            set {
+                this["ColumnNameMusicSong"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("oscarOrg_MusicSong.csv")]
+        public string FileNameMusicSong {
+            get {
+                return ((string)(this["FileNameMusicSong"]));
+            }
+            set {
+                this["FileNameMusicSong"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("oscarOrg_Job.csv")]
+        public string FileNameJob {
+            get {
+                return ((string)(this["FileNameJob"]));
+            }
+            set {
+                this["FileNameJob"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("JobId,Name")]
+        public string ColumnNameJob {
+            get {
+                return ((string)(this["ColumnNameJob"]));
+            }
+            set {
+                this["ColumnNameJob"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("oscarOrg_PersonJob.csv")]
+        public string FileNamePersonJob {
+            get {
+                return ((string)(this["FileNamePersonJob"]));
+            }
+            set {
+                this["FileNamePersonJob"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("PersonId,JobId")]
+        public string ColumnNamePersonJob {
+            get {
+                return ((string)(this["ColumnNamePersonJob"]));
+            }
+            set {
+                this["ColumnNamePersonJob"] = value;
+            }
+        }
     }
 }
